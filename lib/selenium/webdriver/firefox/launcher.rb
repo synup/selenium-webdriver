@@ -64,7 +64,12 @@ module Selenium
         end
 
         def find_free_port
-          @port = PortProber.above @port
+          if !@profile.blank?
+            @port = @port + @profile.lock_port  
+          else
+            @port = PortProber.above @port
+          end
+          @port
         end
 
         def create_profile
