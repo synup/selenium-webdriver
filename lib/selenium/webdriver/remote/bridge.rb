@@ -1,22 +1,3 @@
-# encoding: utf-8
-#
-# Licensed to the Software Freedom Conservancy (SFC) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The SFC licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 module Selenium
   module WebDriver
     module Remote
@@ -104,8 +85,6 @@ module Selenium
             DriverExtensions::HasSessionId,
             DriverExtensions::Rotatable,
             DriverExtensions::HasTouchScreen,
-            DriverExtensions::HasLocation,
-            DriverExtensions::HasNetworkConnection,
             DriverExtensions::HasRemoteStatus
           ]
         end
@@ -342,12 +321,12 @@ module Selenium
           execute :setLocation, {}, :location => loc
         end
 
-        def getNetworkConnection
-          execute :getNetworkConnection
+        def isBrowserOnline
+          execute :isBrowserOnline
         end
 
-        def setNetworkConnection(type)
-          execute :setNetworkConnection, {}, :parameters => {:type => type}
+        def setBrowserOnline(bool)
+          execute :setBrowserOnline, {}, :state => bool
         end
 
         #
@@ -584,7 +563,11 @@ module Selenium
         end
 
         def elementEquals(element, other)
-          element.ref == other.ref
+          if element.ref == other.ref
+            true
+          else
+            execute :elementEquals, :id => element.ref, :other => other.ref
+          end
         end
 
         #

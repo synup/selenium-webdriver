@@ -1,22 +1,3 @@
-# encoding: utf-8
-#
-# Licensed to the Software Freedom Conservancy (SFC) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The SFC licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 require File.expand_path("../spec_helper", __FILE__)
 
 describe "Selenium::WebDriver::TargetLocator" do
@@ -200,7 +181,7 @@ describe "Selenium::WebDriver::TargetLocator" do
   end
 
   describe "alerts" do
-    not_compliant_on :browser => [:iphone, :safari, :phantomjs] do
+    not_compliant_on :browser => [:opera, :iphone, :safari, :phantomjs] do
       it "allows the user to accept an alert" do
         driver.navigate.to url_for("alerts.html")
         driver.find_element(:id => "alert").click
@@ -211,7 +192,8 @@ describe "Selenium::WebDriver::TargetLocator" do
       end
     end
 
-    not_compliant_on({:browser => :chrome, :platform => :macosx},
+    not_compliant_on({:browser => :chrome, :platform => :macosx}, # http://code.google.com/p/chromedriver/issues/detail?id=26
+                     {:browser => :opera},
                      {:browser => :iphone},
                      {:browser => :safari},
                      {:browser => :phantomjs}) do
@@ -226,7 +208,7 @@ describe "Selenium::WebDriver::TargetLocator" do
       end
     end
 
-    not_compliant_on :browser => [:iphone, :safari, :phantomjs] do
+    not_compliant_on :browser => [:opera, :iphone, :safari, :phantomjs] do
       it "allows the user to set the value of a prompt" do
         driver.navigate.to url_for("alerts.html")
         driver.find_element(:id => "prompt").click
@@ -262,7 +244,7 @@ describe "Selenium::WebDriver::TargetLocator" do
 
     end
 
-    not_compliant_on :browser => [:ie, :iphone, :safari, :phantomjs] do
+    not_compliant_on :browser => [:ie, :opera, :iphone, :safari, :phantomjs] do
       it "raises NoAlertOpenError if no alert is present" do
         lambda { driver.switch_to.alert }.should raise_error(
           Selenium::WebDriver::Error::NoAlertPresentError, /alert|modal dialog/i)
