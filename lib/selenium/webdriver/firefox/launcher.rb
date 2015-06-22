@@ -103,7 +103,6 @@ module Selenium
 
         def socket_lock
           lock_port = !@profile.blank? ? @profile.lock_port : 1
-          p "lock_port " + lock_port.to_s
           @socket_lock ||= SocketLock.new(@port - lock_port, SOCKET_LOCK_TIMEOUT)
         end
 
