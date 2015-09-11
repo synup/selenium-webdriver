@@ -25,7 +25,8 @@ module Selenium
         end
 
         def self.default_service(port = nil)
-          new executable_path, port || PortProber.above(DEFAULT_PORT)
+          assigned_port = port.nil? DEFAULT_PORT : (DEFAULT_PORT + port)
+          new executable_path, assigned_port
         end
 
         def initialize(executable_path, port)
