@@ -25,7 +25,10 @@ module Selenium
         end
 
         def self.default_service(port = nil)
-          assigned_port = port.nil? DEFAULT_PORT : (DEFAULT_PORT + port)
+          if port.nil?
+            port = PhantomJS.port
+          end
+          assigned_port = port.nil? ? DEFAULT_PORT : (DEFAULT_PORT + port)
           new executable_path, assigned_port
         end
 

@@ -17,6 +17,14 @@ module Selenium
         @path ||= Platform.find_binary("phantomjs")
       end
 
+      def self.port=(port)
+        @port = port
+      end
+
+      def self.port
+        @port
+      end
+
     end
   end
 end
