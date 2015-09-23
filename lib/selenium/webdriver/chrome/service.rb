@@ -30,7 +30,8 @@ module Selenium
         end
 
         def self.default_service(*extra_args)
-          new executable_path, PortProber.above(DEFAULT_PORT), *extra_args
+          port = DEFAULT_PORT + Selenium::WebDriver::Chrome.port
+          new executable_path, port, *extra_args
         end
 
         def initialize(executable_path, port, *extra_args)

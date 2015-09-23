@@ -21,6 +21,14 @@ module Selenium
         @path ||= nil
       end
 
+      def self.port=(port)
+        @port = port
+      end
+
+      def self.port
+        @port ||= 0
+      end      
+
     end
   end
 end
