@@ -29,7 +29,7 @@ module Selenium
             )
           end
 
-          MAX_RETRIES = 3
+          MAX_RETRIES = 10
 
           def request(verb, url, headers, payload, redirects = 0)
             request = new_request_for(verb, url, headers, payload)
